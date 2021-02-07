@@ -11,7 +11,7 @@ class Modalidad(models.Model):
 class Deporte(models.Model):
     nombre = models.CharField(max_length=100)
     icono = models.CharField(max_length=200)
-    modalidad = models.ForeignKey(Modalidad)
+    modalidad = models.ForeignKey(Modalidad, on_delete= models.CASCADE)
 
     def __str__(self):
         return 'deporte: ' + self.nombre + ' icono: ' + self.icono
@@ -29,8 +29,8 @@ class Deportista(models.Model):
     lugar_nacimiento = models.CharField(max_length=200)
     fecha_nacimiento =  models.DateField()
     edad = models.IntegerField()
-    peso = models.DecimalField()
-    estatura = models.DecimalField()
+    peso = models.FloatField()
+    estatura = models.FloatField()
     entrenador = models.CharField(max_length=100)
     foto = models.CharField(max_length=200)
     
@@ -40,10 +40,10 @@ class Deportista(models.Model):
 class Participacion(models.Model):
     fecha = models.DateField()
     hora = models.TimeField()
-    resultado = models.DecimalField()
-    deportista = models.ForeignKey(Deportista)
-    evento = models.ForeignKey(Evento)
-    deporte = models.ForeignKey(Deporte)
+    resultado = models.FloatField()
+    deportista = models.ForeignKey(Deportista, on_delete= models.CASCADE)
+    evento = models.ForeignKey(Evento, on_delete= models.CASCADE)
+    deporte = models.ForeignKey(Deporte, on_delete= models.CASCADE)
 
     def __str__(self):
         return 'participacion:' + self.fecha + ' ' + self.deportista
