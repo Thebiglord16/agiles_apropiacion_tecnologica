@@ -59,4 +59,12 @@ class Estudiante(models.Model):
     def __str__(self):
         return 'estudiante:' + self.nombre
 
+class Comentario(models.Model):
+    contenido = models.CharField(max_length=500)
+    fecha = models.TimeField()
+    evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
+    estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
+
+    def _str_(self):
+        return "Comentario: "+ self.contenido
 
